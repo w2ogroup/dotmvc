@@ -1,6 +1,12 @@
 # Dot MVC
 
-A tiny, sensible MVC framework in modern Javascript.
+A tiny, sensible, client-side MVC framework in modern Javascript.
+
+# How To Use
+
+```
+npm install dotmvc
+```
 
 # API
 
