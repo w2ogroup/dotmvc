@@ -7,6 +7,9 @@ A tiny, sensible, client-side MVC framework in modern Javascript.
 
 # How To Use
 
+**Dot MVC** is meanet to be used with [Browserify](http://browserify.org/), so
+install it with `npm`:
+
 ```
 npm install dotmvc
 ```
