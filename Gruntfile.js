@@ -36,10 +36,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', [
+  grunt.registerTask('test', [
     'jshint',
     'browserify',
     'qunit'
   ]);
+
+  grunt.registerTask('default', ['test']);
 
 };

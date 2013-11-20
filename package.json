@@ -7,6 +7,12 @@
     "type": "git",
     "url": "git@github.com:bvalosek/dotmvc.git"
   },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
