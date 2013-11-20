@@ -1,5 +1,8 @@
 # Dot MVC
 
+[![Build Status](https://travis-ci.org/bvalosek/dotmvc.png?branch=master)](https://travis-ci.org/bvalosek/dotmvc)
+[![NPM version](https://badge.fury.io/js/dotmvc.png)](http://badge.fury.io/js/dotmvc)
+
 A tiny, sensible, client-side MVC framework in modern Javascript.
 
 # How To Use
@@ -204,11 +207,11 @@ Testing requires [node/npm](http://nodejs.org) and
 [grunt-cli](https://github.com/gruntjs/grunt-cli) to be installed on your
 system.
 
-To install all the dev dependencies and run the test target:
+To install all the dev dependencies and run `grunt`:
 
 ```
 npm install
-grunt test
+grunt
 ```
 
 # License

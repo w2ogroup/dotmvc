@@ -24,16 +24,22 @@ module.exports = function(grunt) {
           transform: ['coffeeify']
         }
       }
+    },
+
+    qunit: {
+      test: ['test/index.html']
     }
   });
 
   // plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', [
     'jshint',
-    'browserify'
+    'browserify',
+    'qunit'
   ]);
 
 };
