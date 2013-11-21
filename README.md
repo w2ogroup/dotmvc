@@ -58,6 +58,8 @@ module.exports = (function() {
 })();
 ```
 
+### `static` LAYOUT
+
 ### `static` TEMPLATE
 
 Templating function to be used for this view. Can be any templating engine so
