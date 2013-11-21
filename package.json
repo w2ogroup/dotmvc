@@ -1,6 +1,6 @@
 {
   "name": "dotmvc",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A tiny, sensible, client-side MVC framework in modern Javascript.",
   "author": "Brandon Valosek",
   "repository": {
