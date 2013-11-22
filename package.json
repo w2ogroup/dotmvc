@@ -21,7 +21,8 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-browserify": "~1.2.11",
     "coffeeify": "~0.5.2",
-    "grunt-contrib-qunit": "~0.3.0"
+    "grunt-contrib-qunit": "~0.3.0",
+    "grunt-contrib-watch": "~0.5.3"
   },
   "dependencies": {
     "underscore": "~1.5.2",

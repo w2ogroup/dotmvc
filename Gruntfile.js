@@ -28,10 +28,20 @@ module.exports = function(grunt) {
 
     qunit: {
       test: ['test/index.html']
+    },
+
+    watch: {
+      lib: {
+        files: ['test/unit/**/*.coffee', 'lib/**/*.js', 'lib/**/*.coffee'],
+        tasks: ['jshint', 'browserify']
+      },
+
+      options: { livereload: 35729 }
     }
   });
 
   // plugins
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-browserify');
