@@ -59,7 +59,69 @@ A modern, compliant browser is required.
 
 ## Overview
 
-### View ([API](doc/view-api.md))
+### *class* | *mixin* Observable ([API](doc/observable-api.md))
+
+* An observable object is an object that can alert listeners when a property
+  changes, either automatically by setting up *observable properties*, or
+  manually by calling the `triggerPropertyChange()` method.
+* Observable properties are managed via ES5 getters and setters, meaning simple
+  property assignment is all that is needed to change an observable property
+  and emit a change event.
+* If an obseverable property is set to an observable object, change events from
+  that object will cause change events in the parent object to fire, allowing
+  you to nest observable objects.
+* Observable properties can either be set to values or functions. The latter
+  will track dependencies, effectively allowing you to have *computed
+  observable properties*.
+
+#### Creating an Observable Object
+
+You can either directly instantiate an object from the `Observable` class, or
+mixin the methods from `Observable.prototype`, or subclass it via prototypical
+inheritance. All three methods will give you the functionality needed to
+trigger event changes or create observable properties.
+
+#### Computed Observable Properties
+
+Creating an observable property that is a function will track any *dependent
+observable properties* accessed during function evaluation.
+
+```javascript
+__mixin(Person, Observable);
+function Person()
+{
+  Person.observable({
+    firstName : 'John',
+    lastName  : 'Doe',
+    fullName  : function() {
+      return this.firstName + ' ' + this.lastName;
+    }
+  });
+}
+
+var person = new Person();
+
+person.onPropertyChange({
+  firstName: function() { console.log('firstName changed'); },
+  fullName: function() { console.log('fullName changed'); }
+});
+
+person.firstName = 'Bob';
+```
+
+This creates a `Person` object called `person`, and wires up some functions to
+be fired whenever the `firstName` or `fullName` properties change. The console
+output would be:
+
+```
+firstName changed.
+fullName changed.
+```
+
+as `fullName` is a computed observable property with `firstName` as a dependent
+property.
+
+### *class* View ([API](doc/view-api.md))
 
 * A `View` in Dot MVC is a super-powered chunk of UI. All display logic and
   visual code lives inside of a view.
@@ -164,8 +226,6 @@ create the subview. The `View` parameter specifies the view class, and the
 
 ### Controller ([API](doc/controller-api.md))
 
-### Observable ([API](doc/observable-api.md))
-
 ### Binding ([API](doc/binding-api.md))
 
 ### Application ([API](doc/application-api.md))
@@ -173,6 +233,46 @@ create the subview. The `View` parameter specifies the view class, and the
 ### mixin ([API](doc/util-api.md#mixin))
 
 ### extends ([API](doc/util-api.md#extends))
+
+## Coffeescript
+
+Though Dot MVC is written in Javascript and intended to be used in Javascript,
+it looks even sexier in Coffeescript if you're lucky enough to be in an
+environment where that is acceptable. Or maybe you're just a massive code
+hispter and refuse to write vanilla JS.
+
+### Examples
+
+Using the `extends` keyword and `super` makes subclassing much cleaner:
+
+```coffeescript
+class AwesomeWidget extends View
+  init: ->
+    super
+    delegate '.back-button', 'click', @close
+```
+
+Since the `observable()` function exists on the constructor of `Observable`,
+using this annotation-style declaration works:
+
+```coffeescript
+class Person extends Observable
+  @observable firstName: 'John'
+  @observable lastName: 'Doe'
+  @observable fullName: -> '#{@firstName} #{@lastName}'
+```
+
+Arrow-style syntax is great here for inline event handling:
+
+```coffeescript
+@delegate 'li','click', -> console.log 'dadgum'
+```
+
+Noiseless object literals:
+
+```coffeescript
+@delegateCommand '#save', 'click', saveUserPreferences: @user
+```
 
 ## Testing
 
