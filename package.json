@@ -1,10 +1,17 @@
 {
   "name": "dotmvc",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A tiny, sensible, client-side MVC framework in modern Javascript.",
   "author": "Brandon Valosek",
-  "keywords": ["mvc", "model", "view", "controller", "client", "router",
-    "inheritance"],
+  "keywords": [
+    "mvc",
+    "model",
+    "view",
+    "controller",
+    "client",
+    "router",
+    "inheritance"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:bvalosek/dotmvc.git"
