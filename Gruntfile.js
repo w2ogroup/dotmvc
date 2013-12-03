@@ -21,7 +21,13 @@ module.exports = function(grunt) {
         dest: 'test/bin/main.js',
         options: {
           debug: true,
-          transform: ['coffeeify']
+          transform: ['coffeeify'],
+          shim: {
+            jquery: {
+              path: './bower_components/jquery/jquery.js',
+              exports: '$'
+            }
+          }
         }
       }
     },
