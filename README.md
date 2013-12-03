@@ -29,7 +29,7 @@ npm install dotmvc
 All of the components you'll need are in the `lib/` directory of the package.
 
 ```javascript
-var View = require('dotmvc/lib/View');
+var View       = require('dotmvc/lib/View');
 var Controller = require('dotmvc/lib/Controller');
 ...
 ```
@@ -39,14 +39,14 @@ Alternatively, all classes are exposed directly on the package itself.
 ```javascript
 var DotMVC = require('dotmvc');
 
-var view = new DotMVC.View;
+var view = new DotMVC.View();
 ...
 ```
 
 ## Browser Support
 
-**Dot MVC** is a modern Javascript framework that makes liberal use of the [ES5
-feature set]. This includes the new `Array.prototype` methods as well as
+**Dot MVC** is a modern Javascript framework that makes liberal use of the ES5
+feature set. This includes the new `Array.prototype` methods as well as
 frequent use of `Object.defineProperty()`.
 
 A modern, compliant browser is required.
@@ -61,7 +61,7 @@ A modern, compliant browser is required.
 
 ### *class* | *mixin* Observable ([API](doc/observable-api.md))
 
-* An observable object is an object that can alert listeners when a property
+* An *observable object* is an object that can alert listeners when a property
   changes, either automatically by setting up *observable properties*, or
   manually by calling the `triggerPropertyChange()` method.
 * Observable properties are managed via ES5 getters and setters, meaning simple
@@ -128,7 +128,9 @@ property.
 * Every view has an identic, immutable DOM node that is either created during
   instantiation, or passed in to the constructor.
 * A view is drawn via its `render()` method. This method is responsible for
-  updating the DOM to reflect the state of the view and its bound data.
+  updating the DOM to reflect the state of the view and its bound data. The
+  default behavior depends on whether the view has a *template* or *layout*
+  set.
 * Views have an observable `context` property that corresponds to the data that
   is currently bound to that view. If the `context` is observable and emits
   change events, the view will automatically be re-rendered.
@@ -157,12 +159,16 @@ view's `this` pointer.
 this.delegate('li', 'click', this.onItemClick);
 ```
 
+This means even if the DOM identites of the internal elements change (or are
+added after the `delegate` method is called), events will still be caught as
+expected.
+
 #### Commands
 
 A view should not contain any business or domain logic, but rather delegate any
-interaction to either its own context or a higher-level object, via a command.
-Commands bubble up the DOM hierarchy until finding a view whose own data context
-can handle the command.
+interaction to either its own data context or a higher-level object, via a
+command.  Commands bubble up the DOM hierarchy until finding a view whose own
+data context can handle the command.
 
 ```javascript
 this.executeCommand({ saveUserPreferences: user });
@@ -194,10 +200,15 @@ the layout DOM elements does not change. This is best when designing larger
 views that a composed of several smaller subviews.
 
 Both layouts and templates can be set with their corresponding instance methods
-or on the View's constructor, e.g.,
+or on the View's constructor as a "static property", e.g.,
 
 ```javascript
 WidgetView.TEMPLATE = htmlTemplatingFunction;
+```
+
+```javascript
+// Only works if the view has been initialized yet
+myView.setTemplate(htmlTemplatingFunction);
 ```
 
 #### Creating Sub Views
@@ -205,7 +216,7 @@ WidgetView.TEMPLATE = htmlTemplatingFunction;
 Compositing views can be done by using the `createViews()` method to
 instantiate a new View on an existing interior DOM node. Calling this method
 while using a template will log a warning, as the identity of interior DOM
-could potentially change, losing the sub view.
+could potentially change, losing the sub view (see Layouts vs Templates above).
 
 ```javascript
 this.createViews({
@@ -238,8 +249,7 @@ create the subview. The `View` parameter specifies the view class, and the
 
 Though Dot MVC is written in Javascript and intended to be used in Javascript,
 it looks even sexier in Coffeescript if you're lucky enough to be in an
-environment where that is acceptable. Or maybe you're just a massive code
-hispter and refuse to write vanilla JS.
+environment where that is acceptable.
 
 ### Examples
 
@@ -276,18 +286,25 @@ Noiseless object literals:
 
 ## Testing
 
-Unit testing is done by [QUnit] and can be run from the [CLI] via [PhantomJS]
-and [Grunt].
+Unit testing is done by [QUnit](http://qunitjs.com/) and can be run from the
+command line via [Grunt](http://gruntjs.com/).
 
 Testing requires [node/npm](http://nodejs.org) and
 [grunt-cli](https://github.com/gruntjs/grunt-cli) to be installed on your
-system.
+system, as well as [bower](https://github.com/bower/bower).
 
-To install all the dev dependencies and run `grunt`:
+To ensure you have the required apps:
+
+```
+npm install -g bower grunt-cli
+```
+
+Then install all the dev dependencies and run the tests:
 
 ```
 npm install
-grunt
+bower install
+grunt test
 ```
 
 ## License
