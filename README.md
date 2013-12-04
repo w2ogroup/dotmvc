@@ -121,6 +121,17 @@ fullName changed.
 as `fullName` is a computed observable property with `firstName` as a dependent
 property.
 
+### Binding ([API](doc/binding-api.md))
+
+* A Binding is an object that creates a linking between a *source object* /
+  *source property* pair, and a *target object* / *target property* pair.
+* Bindings are used to keep seperate objects and models in sync without them
+  having to be aware of one another.
+* The power of bindings comes from the use of `Observable` objects as the
+  source, allowing property changes in the source to propigate to the target.
+* By default, a binding is *one-way*, meaning that changes in the source are
+  reflected in the target.
+
 ### *class* View ([API](doc/view-api.md))
 
 * A `View` in Dot MVC is a super-powered chunk of UI. All display logic and
@@ -235,15 +246,9 @@ The hash is a mapping between a jQuery selector and information on how to
 create the subview. The `View` parameter specifies the view class, and the
 `context` parameter can either be a `Binding` or just an object.
 
-### Controller ([API](doc/controller-api.md))
-
-### Binding ([API](doc/binding-api.md))
-
 ### Application ([API](doc/application-api.md))
 
-### mixin ([API](doc/util-api.md#mixin))
-
-### extends ([API](doc/util-api.md#extends))
+### Controller ([API](doc/controller-api.md))
 
 ## Coffeescript
 
