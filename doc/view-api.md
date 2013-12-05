@@ -10,9 +10,15 @@ A chunk of UI.
 Sets up the view's DOM components.
 
 <a name="render"></a>
-### render()
+### render(`context`)
 
 Update the view's visual component.
+
+#### `context`: Object || *null*
+
+The render method will, by default, call the templating function for either the
+*layout* or *template* with the `View` object as the argument unless an
+optional, truthy `context` parameter is supplied.
 
 <a name="executeCommand"></a>
 ### executeCommand(`commandMap`)
