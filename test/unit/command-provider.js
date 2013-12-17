@@ -1,7 +1,7 @@
 var CommandProvider = require('../../lib/CommandProvider.js');
 var Command         = require('../../lib/Command.js');
 
-QUnit.module('CommandProvider');
+QUnit.module('Command and CommandProvider');
 
 var test        = QUnit.test;
 var ok          = QUnit.ok;
