@@ -1,4 +1,5 @@
 var CommandProvider = require('../../lib/CommandProvider.js');
+var Command         = require('../../lib/Command.js');
 
 QUnit.module('CommandProvider');
 
@@ -19,7 +20,7 @@ test('basic functionality', function() {
 
   t.registerCommand({ command: cb });
 
-  var command = new CommandProvider.Command(global, 'command', param);
+  var command = new Command(global, 'command', param);
   var r = CommandProvider.attemptExecuteCommand(t, command);
   strictEqual(r, true, 'command handled');
   strictEqual(command.response, ret, 'command response value');
@@ -31,8 +32,7 @@ test('callback context', 2, function() {
   t.cb = function() { strictEqual(this, t, 'context preserved'); };
   t.cb();
   t.registerCommand({ command: t.cb });
-  CommandProvider.attemptExecuteCommand(t,
-    new CommandProvider.Command(global, 'command'));
+  CommandProvider.attemptExecuteCommand(t, new Command(global, 'command'));
 });
 
 test('Duped handlers', function() {
@@ -47,7 +47,7 @@ test('Duped handlers', function() {
 
 test('Bad command construction', function() {
 
-  var Command = CommandProvider.Command;
+  var Command = Command;
 
   throws(function() { new Command(); }, 'no params throws');
   throws(function() { new Command({}); }, 'no message name throws');
