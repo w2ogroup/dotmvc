@@ -96,6 +96,7 @@ test 'Two way binding and target removal', ->
   c = new Obv
 
   binding = new Binding()
+  binding.mode = Binding.modes.TWO_WAY
   binding.setSource(a, 'prop')
   binding.setTarget(b, 'prop')
 

@@ -111,15 +111,3 @@ test 'nested deps', 8, ->
   o.gender = 'male' # nop
   strictEqual o.greeting, 'Hello, Mr. Pat Doe!'
 
-test 'post define params', ->
-  obv = new ObservableObject
-  obv.registerProperty 'prop', 123
-  obv.onPropertyChange prop: -> ok true, 'prop change'
-
-  strictEqual obv.prop, 123, 'init val'
-  obv.prop = 456 # fire
-  strictEqual obv.prop, 456, 'changed val'
-  obv.prop = 456 # nop
-
-
-
