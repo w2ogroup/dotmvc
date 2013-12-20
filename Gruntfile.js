@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     watch: {
       lib: {
         files: ['test/unit/**', 'lib/**'],
-        tasks: ['test']
+        tasks: ['jshint', 'browserify']
       },
 
       options: { livereload: 35729 }
