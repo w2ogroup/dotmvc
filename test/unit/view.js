@@ -15,17 +15,70 @@ test('Basic view', function() {
 
   var node = document.createElement('div');
   var v = new View(node);
-  strictEqual(v.element, node, 'dom identity');
+  strictEqual(v.element, node, 'DOM identity');
 
 });
 
 test('Constructor throws', function() {
 
+  var V = makeViewClass();
+  V.DOM_NODE = 'li';
   throws(function() {
-    var V = makeViewClass();
-    V.DOM_NODE = 'li';
     new V(document.createElement('div'));
-  }, 'view node mismatch');
+  }, 'View node name mismatch');
+
+  var div = document.createElement('div');
+  new View(div);
+  throws(function() { new View(div); }, 'Dupe on dom nodes');
+
+});
+
+test('init() throws', function() {
+
+  var v = new View();
+  v.init();
+  throws(function() { v.init(); }, 'Dupe on init()');
+
+  var w = new View();
+  w.template = function() {};
+  w.layout = function() {};
+  throws(function() { w.init(); }, 'Layout and template');
+
+});
+
+test('render() throws', function() {
+
+  var v = new View();
+  v.init = function() {};
+  throws(function() { v.render(); }, 'Base init() not called');
+
+  var w = new View();
+  w.close();
+  throws(function() { v.render(); }, 'Post-close render()');
+
+});
+
+test('addView() throws', function() {
+
+  var v = new View();
+  v.template = function() {};
+  throws(function() { v.addView(new View()); }, 'Unsafe addView');
+
+  var w = new View();
+  w.render = function() {};
+  throws(function() { new View().addView(w); }, 'Base render() not called');
+
+});
+
+test('clear() throws', function() {
+
+  var v = new View();
+  v.layout = function() {};
+  throws(function() { v.clear(); }, 'clear() with layout');
+
+  v = new View();
+  v._subviewsCreated = true; // simulate call createView
+  throws(function() { v.clear(); }, 'clear() with subviews');
 
 });
 
