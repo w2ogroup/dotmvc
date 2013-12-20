@@ -121,7 +121,7 @@ asyncTest('Basic data context semantics', function() {
     start();
   };
 
-  context = {};
+  var context = {};
   v.context = context;
   strictEqual(v.context, context, 'synchronous context setting');
   strictEqual(rendered, false, 'render() on context change is async');

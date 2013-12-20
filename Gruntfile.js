@@ -32,6 +32,16 @@ module.exports = function(grunt) {
       }
     },
 
+    // dox
+    jsdoc: {
+      lib: {
+        src: ['lib/**/*.js'],
+        options: {
+          dest: 'doc'
+        }
+      }
+    },
+
     qunit: {
       test: ['test/index.html']
     },
@@ -50,6 +60,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('test', [
