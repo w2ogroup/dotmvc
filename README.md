@@ -246,49 +246,6 @@ The hash is a mapping between a jQuery selector and information on how to
 create the subview. The `View` parameter specifies the view class, and the
 `context` parameter can either be a `Binding` or just an object.
 
-### Application ([API](doc/application-api.md))
-
-### Controller ([API](doc/controller-api.md))
-
-## Coffeescript
-
-Though Dot MVC is written in Javascript and intended to be used in Javascript,
-it looks even sexier in Coffeescript if you're lucky enough to be in an
-environment where that is acceptable.
-
-### Examples
-
-Using the `extends` keyword and `super` makes subclassing much cleaner:
-
-```coffeescript
-class AwesomeWidget extends View
-  init: ->
-    super
-    delegate '.back-button', 'click', @close
-```
-
-Since the `observable()` function exists on the constructor of `Observable`,
-using this annotation-style declaration works:
-
-```coffeescript
-class Person extends Observable
-  @observable firstName: 'John'
-  @observable lastName: 'Doe'
-  @observable fullName: -> '#{@firstName} #{@lastName}'
-```
-
-Arrow-style syntax is great here for inline event handling:
-
-```coffeescript
-@delegate 'li','click', -> console.log 'dadgum'
-```
-
-Noiseless object literals:
-
-```coffeescript
-@delegateCommand '#save', 'click', saveUserPreferences: @user
-```
-
 ## Testing
 
 Unit testing is done by [QUnit](http://qunitjs.com/) and can be run from the
