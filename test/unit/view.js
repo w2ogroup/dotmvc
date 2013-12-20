@@ -1,5 +1,6 @@
-var View      = require('../../lib/View.js');
-var __extends = require('../../lib/util/extends.js');
+var View       = require('../../lib/View.js');
+var Observable = require('../../lib/Observable.js');
+var __extends  = require('../../lib/util/extends.js');
 
 QUnit.module('View');
 
@@ -104,6 +105,47 @@ test('Layout semantics', function() {
   var node = v.$('#a')[0];
   v.render();
   strictEqual(node, v.$('#a')[0], 'DOM identity preserved across render()');
+
+});
+
+asyncTest('Basic data context semantics', function() {
+
+  var v = new View();
+  var rendered = false;
+  var last = {};
+  v.render = function() {
+    View.prototype.render.call(this);
+    rendered = true;
+    strictEqual(this.context, last, 'context is last one we set on stack');
+    ok(true, 'render fired');
+    start();
+  };
+
+  context = {};
+  v.context = context;
+  strictEqual(v.context, context, 'synchronous context setting');
+  strictEqual(rendered, false, 'render() on context change is async');
+  v.context = context; // nop
+  v.context = 123; // nop
+  v.context = 555; // nop
+  v.context = last;
+
+});
+
+asyncTest('Observable data context', function() {
+
+  var v = new View();
+  v.render = function() {
+    View.prototype.render.call(this);
+    strictEqual(this.context.a, 3, 'obv property is correct');
+    start();
+  };
+
+  var context = new Observable();
+  context.registerProperty('a', 123);
+
+  v.context = context;
+  context.a = 3;
 
 });
 
