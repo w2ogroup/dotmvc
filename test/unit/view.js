@@ -18,6 +18,8 @@ test('Basic view', function() {
   var node = document.createElement('div');
   var v = new View(node);
   strictEqual(v.element, node, 'DOM identity');
+  strictEqual(node.view, v, 'view property added to DOM node');
+  strictEqual(v.$element[0], v.element, 'jQuery element');
 
 });
 
@@ -90,6 +92,18 @@ test('clear() throws', function() {
   v._subviewsCreated = true; // simulate call createView
   throws(function() { v.clear(); },
     ViewInternalError, 'clear() with subviews');
+
+});
+
+test('Layout semantics', function() {
+
+  var layout = function() { return '<div id="a"></div>'; };
+  var v = new View();
+  v.layout = layout;
+  v.render();
+  var node = v.$('#a')[0];
+  v.render();
+  strictEqual(node, v.$('#a')[0], 'DOM identity preserved across render()');
 
 });
 
