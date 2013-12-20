@@ -111,3 +111,7 @@ test 'nested deps', 8, ->
   o.gender = 'male' # nop
   strictEqual o.greeting, 'Hello, Mr. Pat Doe!'
 
+test 'throw on attempting to mutate prototype of base class', ->
+  throws ->
+    ObservableObject.observable someProp: 123
+
