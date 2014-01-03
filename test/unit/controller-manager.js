@@ -4,11 +4,12 @@ var Router            = require('../../lib/Router.js');
 
 QUnit.module('ControllerManager');
 
-test('Basic controller registration and index', 4, function() {
+test('Basic controller registration and index', 5, function() {
 
   var app = new Resolver();
   app.singleton('router', Router);
   var router = app.make('router');
+  var RESP = {};
 
   var manager = new ControllerManager(app);
   var instance;
@@ -17,6 +18,7 @@ test('Basic controller registration and index', 4, function() {
   TestController.prototype.indexAction = function(){
     instance = instance || this;
     strictEqual(instance, this, 'same context');
+    return RESP;
   };
 
   manager.registerController('test', TestController);
@@ -24,7 +26,8 @@ test('Basic controller registration and index', 4, function() {
   router.dispatch('test');
   router.dispatch('test/');
   router.dispatch('/test');
-  router.dispatch('/test/');
+  var resp = router.dispatch('/test/');
+  strictEqual(resp, RESP, 'response');
 
 });
 
