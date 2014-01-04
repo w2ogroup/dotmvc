@@ -34,6 +34,9 @@ test('Nested get and set and has', function() {
   strictEqual(config.has('x'), false);
   strictEqual(config.has('a.b.nope'), false);
 
+  config.set('something', { x: { y: { z: 'baller' }}});
+  strictEqual(config.get('something.x.y.z'), 'baller', 'dot notty');
+
 });
 
 test('Merge', function() {
