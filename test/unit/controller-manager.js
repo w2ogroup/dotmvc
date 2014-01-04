@@ -172,4 +172,29 @@ test('Rest args', 9, function() {
 
 });
 
+test('Controller load and unload', 5, function() {
+
+  var app = new Resolver();
+  app.singleton('router', Router);
+  var router = app.make('router');
+  var manager = new ControllerManager(app);
+
+  function TestController() {}
+  TestController.prototype.indexAction = function() { };
+  TestController.prototype.load = function() { ok(true, 'loaded'); };
+  TestController.prototype.unload = function() { ok(true, 'unloaded'); };
+
+  function TestControllerB() {}
+  TestControllerB.prototype.indexAction = function() { };
+  TestControllerB.prototype.load = function() { ok(true, 'B loaded'); };
+  TestControllerB.prototype.unload = function() { ok(true, 'B unloaded'); };
+
+  manager.registerController('test', TestController);
+  manager.registerController('test-b', TestControllerB);
+
+  router.dispatch('test');
+  router.dispatch('test-b');
+  router.dispatch('test');
+
+});
 
