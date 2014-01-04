@@ -51,7 +51,7 @@ test('Controller routing and config', function() {
   };
 
   // Root config
-  app.getConfig().set('greeting', 'Hello');
+  app.config('greeting', 'Hello');
   app.controller(TestController);
   app.register('greeter', Greeter);
 
