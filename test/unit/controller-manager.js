@@ -198,3 +198,34 @@ test('Controller load and unload', 5, function() {
 
 });
 
+test('Controller with deps', function() {
+
+  var app = new Resolver();
+  app.singleton('router', Router);
+  var router = app.make('router');
+  var manager = new ControllerManager(app);
+
+  function A() { }
+  function B() { }
+
+  app.singleton('a', A);
+  app.singleton('b', B);
+
+  function TestController(a, b) {
+    ok(a instanceof A, 'a is good');
+    ok(b instanceof B, 'b is good');
+  }
+  TestController.prototype.indexAction = function() { };
+
+  manager.registerController('test', TestController);
+
+  router.dispatch('test');
+
+  function BadController(notThere) {  }
+  BadController.prototype.indexAction = function() {};
+  manager.registerController('bad', BadController);
+
+  throws(function() { router.dispatch('bad'); }, 'missing dep');
+
+
+});
