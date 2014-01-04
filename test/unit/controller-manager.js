@@ -229,3 +229,27 @@ test('Controller with deps', function() {
 
 
 });
+
+test('Missing method', function() {
+
+  var app = new Resolver();
+  app.singleton('router', Router);
+  var router = app.make('router');
+  var manager = new ControllerManager(app);
+
+  function TestController() { }
+  TestController.prototype.indexAction = function(id)
+  {
+    ok(true, 'index action');
+  };
+  TestController.prototype.missingMethod = function()
+  {
+    ok(true, 'missing method');
+  };
+
+  manager.registerController('test', TestController);
+
+  router.dispatch('test');
+  router.dispatch('test/fake-shit');
+
+});

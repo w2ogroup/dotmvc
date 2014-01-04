@@ -4,12 +4,15 @@ QUnit.module('Framework');
 
 test('Basic closure routing', function() {
 
+  // Boot
   var app = new Framework();
 
+  // Route
   app.route('/', function() {
     return 'Hello, World!';
   });
 
+  // Test
   strictEqual(app.getRouter().dispatch('/'), 'Hello, World!', 'Hello, World!');
 
 });
