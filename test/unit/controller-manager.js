@@ -37,15 +37,41 @@ test('Controller with action', 3, function() {
   app.singleton('router', Router);
   var router = app.make('router');
   var manager = new ControllerManager(app);
-  manager.registerController('test', TestController);
-
   function TestController() {}
+
   TestController.prototype.coolAction = function() {
     ok(true, 'fired');
   };
 
+  manager.registerController('test', TestController);
+
   router.dispatch('test/cool');
   router.dispatch('/test/cool/');
-  router.dispatch('/test/cool/some/shit');
+  router.dispatch('test/cool/');
+
+  // nops
+  router.dispatch('test/cool/something');
+  router.dispatch('something/test/cool');
+});
+
+test('Arguments for controller', function() {
+
+  var app = new Resolver();
+  app.singleton('router', Router);
+  var router = app.make('router');
+  var manager = new ControllerManager(app);
+
+  function TestController() {}
+  TestController.prototype.userAction = function(id) {
+    ok(true, 'fired');
+    strictEqual(this instanceof TestController, true, 'context');
+    strictEqual(id, '1', 'param passed');
+  };
+
+  manager.registerController('test', TestController);
+
+  router.dispatch('test/user/1');
+  router.dispatch('test/user/1/');
+  router.dispatch('/test/user/1/');
 
 });

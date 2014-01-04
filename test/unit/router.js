@@ -6,6 +6,14 @@ test('Pattern parsing', function() {
 
   var compile = Router.compilePattern;
 
+  // fuck them slashes
+  strictEqual(compile('route').test('route'), true);
+  strictEqual(compile('route').test('/route'), true);
+  strictEqual(compile('route').test('route/'), true);
+  strictEqual(compile('route').test('/route/'), true);
+  strictEqual(compile('route').test('shit'), false);
+  strictEqual(compile('route').test('routeshit'), false);
+  strictEqual(compile('route').test('shitroute'), false);
 
   // 1 or more normal params, lose the first parenth
   strictEqual(compile('route/{a}').test('route/something'), true);
