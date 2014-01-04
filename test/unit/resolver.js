@@ -105,3 +105,33 @@ test('Singleton as a dep', 2, function() {
   r.make('t');
 
 });
+
+test('Using closures', function() {
+
+
+  var r = new Resolver();
+  var DEP = {};
+  var B_DEP = {};
+
+  r.register('dep', function() {
+    return DEP;
+  });
+
+  strictEqual(r.make('dep'), DEP, 'no deps');
+
+  function A() { }
+  r.register('a', A);
+  r.register('b', function() {
+    return B_DEP;
+  });
+  r.register('c', function(a, b) {
+    return { a: a, b: b };
+  });
+
+  ok(r.make('c').a instanceof A, 'a instantiated');
+  strictEqual(r.make('c').b, B_DEP, 'b corret');
+
+
+
+
+});
