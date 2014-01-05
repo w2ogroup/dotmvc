@@ -1,5 +1,6 @@
 var Config    = require('../../lib/facades/Config.js');
 var Route     = require('../../lib/facades/Route.js');
+var App       = require('../../lib/facades/App.js');
 var Framework = require('../../lib/Framework.js');
 
 QUnit.module('Framework');
@@ -18,24 +19,42 @@ test('Basic closure routing', function() {
 
 test('Basic controller', function() {
 
+  // Dependency
+  function Greeter()
+  {
+    this.greeting = Config.get('greeting');
+  }
+
+  Greeter.prototype.greet = function(name)
+  {
+    return this.greeting + ', ' + name + '!';
+  };
 
   // Controller
-  var TestController = function ()
+  var TestController = function (greeter)
   {
-
+    this.greeter = greeter;
   };
 
-  TestController.prototype.indexAction = function()
+  TestController.prototype.envAction = function()
   {
-    return 'Hello, World!';
+    return Config.get('environment.inBrowser');
   };
 
-  // Boot
-  var app = new Framework();
-  app.start();
+  TestController.prototype.helloAction = function(_name)
+  {
+    return this.greeter.greet(_name || 'World');
+  };
+
+  // Startup
+  new Framework().start();
   Route.controller('test', TestController);
+  App.register('greeter', Greeter);
+  Config.set('greeting', 'Hello');
 
-  strictEqual(Route.dispatch('test'), 'Hello, World!');
+  // Test
+  strictEqual(Route.dispatch('test/hello/Brandon'), 'Hello, Brandon!');
+  strictEqual(Route.dispatch('test/env'), true);
 
 });
 
