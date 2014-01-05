@@ -1,4 +1,4 @@
-var ControllerManager = require('../../lib/ControllerManager.js');
+var ControllerManager = require('../../lib/framework/ControllerManager.js');
 var Resolver          = require('../../lib/Resolver.js');
 var Router            = require('../../lib/Router.js');
 
