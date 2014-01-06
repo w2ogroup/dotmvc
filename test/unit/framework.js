@@ -36,11 +36,6 @@ test('Basic controller', function() {
     this.greeter = greeter;
   };
 
-  TestController.prototype.envAction = function()
-  {
-    return Config.get('environment.inBrowser');
-  };
-
   TestController.prototype.helloAction = function(_name)
   {
     return this.greeter.greet(_name || 'World');
@@ -54,7 +49,6 @@ test('Basic controller', function() {
 
   // Test
   strictEqual(Route.dispatch('test/hello/Brandon'), 'Hello, Brandon!');
-  strictEqual(Route.dispatch('test/env'), true);
 
 });
 
