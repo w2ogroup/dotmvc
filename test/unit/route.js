@@ -177,7 +177,7 @@ test('Default', function() {
 
 });
 
-test('All together now', function() {
+test('Routing', function() {
 
   var ACTION = {};
 
@@ -193,5 +193,12 @@ test('All together now', function() {
     { id: '123', action: 'photos', opts: undefined });
   deepEqual(route.getParamsFromUri('user/123/photos/2014/01/nye-party'),
     { id: '123', action: 'photos', opts: '2014/01/nye-party' });
+
+  strictEqual(route.getUriFromParams({ id: 123 }),
+    'user/123/profile');
+  strictEqual(route.getUriFromParams({ id: 123, action: 'photos'}),
+    'user/123/photos');
+  strictEqual(route.getUriFromParams({ id: 123, opts: 'a/b/c/awesome!' }),
+    'user/123/profile/a/b/c/awesome!');
 
 });
