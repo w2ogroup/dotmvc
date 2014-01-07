@@ -201,4 +201,8 @@ test('Routing', function() {
   strictEqual(route.getUriFromParams({ id: 123, opts: 'a/b/c/awesome!' }),
     'user/123/profile/a/b/c/awesome!');
 
+  throws(function() {
+    route.getUriFromParams({ id: 'asdf' });
+  }, 'invalid wheres for reverse route');
+
 });
