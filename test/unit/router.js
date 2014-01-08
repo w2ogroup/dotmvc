@@ -61,8 +61,8 @@ test('Action handler', 2, function() {
   var router = new Router();
   var ACTION = {};
 
-  router.addActionHandler({
-    executeAction: function(route, args) {
+  router.addHandler({
+    onAction: function(route, args) {
       ok(true, 'executeAction() fired');
       strictEqual(route.action, ACTION, 'action passed');
     }
@@ -82,8 +82,8 @@ test('Response handler', 2, function() {
     if (a) return RESP;
   });
 
-  router.addResponseHandler({
-    handleResponse: function(resp) {
+  router.addHandler({
+    onResponse: function(resp) {
       ok(true, 'handleResponse fired');
       strictEqual(resp, RESP, 'response object passed in');
     }
@@ -100,11 +100,11 @@ test('Action handler fallthrough', function() {
   var first = false;
   var a = 0;
   var b = 0;
-  router.addActionHandler({
-    executeAction: function() { a++; return first; }
+  router.addHandler({
+    onAction: function() { a++; return first; }
   });
-  router.addActionHandler({
-    executeAction: function() { b++; }
+  router.addHandler({
+    onAction: function() { b++; }
   });
 
   router.createRoute('something', {});
@@ -126,11 +126,11 @@ test('Response handler fallthrough', function() {
   var a = 0;
   var b = 0;
 
-  router.addResponseHandler({
-    handleResponse: function(resp) { a++; return first; }
+  router.addHandler({
+    onResponse: function(resp) { a++; return first; }
   });
-  router.addResponseHandler({
-    handleResponse: function(resp) { b++; }
+  router.addHandler({
+    onResponse: function(resp) { b++; }
   });
   router.createRoute('something', function() { return true; });
 
@@ -145,6 +145,36 @@ test('Response handler fallthrough', function() {
 
 });
 
+test('Handler via deps', 4, function() {
+
+  var ACTION = {};
+  var RESP   = {};
+  var route;
+
+  var mockResolver = {
+    make: function(d) { return d === 'a' ? new A() : new B(); }
+  };
+
+  function A() { }
+  A.prototype.onAction = function(r, args)  {
+    deepEqual(args, ['1', '2'], 'args');
+    strictEqual(r, route, 'route passed in');
+    strictEqual(r.action, ACTION, 'action passed in');
+    return RESP;
+  };
+  function B() { }
+  B.prototype.onResponse = function(response)  {
+    strictEqual(response, RESP, 'response');
+  };
+
+  var router = new Router(mockResolver);
+  router.addHandler('a');
+  router.addHandler('b');
+  route = router.createRoute('test/{a}/{b}', ACTION);
+  router.dispatch('test/1/2');
+
+});
+
 test('getUrl()', function() {
 
   var router = new Router();
@@ -152,7 +182,6 @@ test('getUrl()', function() {
     function(name, adjective, extra) { })
     .default('adjective', 'baller')
     .named('test');
-
 
   strictEqual(router.getUrl('test',
     { name: 'Brandon', adjective: 'awesome' }),
@@ -187,6 +216,5 @@ test('With deps', function() {
     .with('a', 'b');
 
   router.dispatch('test/brandon/is/awesome');
-
 
 });

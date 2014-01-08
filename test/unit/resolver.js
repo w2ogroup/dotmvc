@@ -106,6 +106,15 @@ test('Singleton as a dep', 2, function() {
 
 });
 
+test('Nop', function() {
+
+  var r = new Resolver();
+  var weird = {};
+
+  strictEqual(r.make(weird), weird, 'identity transform');
+
+});
+
 test('Using closures', function() {
 
 
