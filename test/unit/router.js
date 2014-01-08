@@ -145,6 +145,29 @@ test('Response handler fallthrough', function() {
 
 });
 
+test('getUrl()', function() {
+
+  var router = new Router();
+  router.createRoute('test/{name}/is/{adjective}/{extra...?}',
+    function(name, adjective, extra) { })
+    .default('adjective', 'baller')
+    .named('test');
+
+
+  strictEqual(router.getUrl('test',
+    { name: 'Brandon', adjective: 'awesome' }),
+    'test/Brandon/is/awesome');
+
+  strictEqual(router.getUrl('test',
+    { adjective: 'awesome', name: 'Brandon', extra: 'forreal!' }),
+    'test/Brandon/is/awesome/forreal!');
+
+  strictEqual(router.getUrl('test',
+    { name: 'Brandon', extra: 'forreal!' }),
+    'test/Brandon/is/baller/forreal!');
+
+});
+
 test('With deps', function() {
 
   var mockResolver = {
