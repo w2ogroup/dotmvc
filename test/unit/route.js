@@ -206,3 +206,20 @@ test('Routing', function() {
   }, 'invalid wheres for reverse route');
 
 });
+
+test('With deps', function() {
+
+  deepEqual(
+    new Route().with('a', 'b', 'c').dependencies,
+    ['a', 'b', 'c'],
+    'single with');
+  deepEqual(
+    new Route().with('a', 'b', 'c').with('x', 'y').dependencies,
+    ['a', 'b', 'c', 'x', 'y'],
+    'multi with');
+  deepEqual(
+    new Route().with('a', 'b', 'c').with('x', 'y').with('a', 'c', 'x').dependencies,
+    ['a', 'b', 'c', 'x', 'y'],
+    'multi with, with dupes');
+
+});

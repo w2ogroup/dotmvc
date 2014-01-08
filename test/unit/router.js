@@ -144,3 +144,27 @@ test('Response handler fallthrough', function() {
   strictEqual(b, 1, 'second NOT fired');
 
 });
+
+test('With deps', function() {
+
+  var mockResolver = {
+    make: function(d) { return d === 'a' ? new A() : new B(); }
+  };
+
+  function A() { }
+  function B() { }
+
+  var router = new Router(mockResolver);
+
+  router.createRoute('test/{noun}/is/{adjective}',
+    function(noun, adjective, a, b) {
+      console.log(arguments);
+      ok(a instanceof A, 'a dep');
+      ok(b instanceof B, 'b dep');
+    })
+    .with('a', 'b');
+
+  router.dispatch('test/brandon/is/awesome');
+
+
+});
