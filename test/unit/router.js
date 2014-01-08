@@ -158,7 +158,6 @@ test('With deps', function() {
 
   router.createRoute('test/{noun}/is/{adjective}',
     function(noun, adjective, a, b) {
-      console.log(arguments);
       ok(a instanceof A, 'a dep');
       ok(b instanceof B, 'b dep');
     })
