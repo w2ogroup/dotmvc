@@ -22,7 +22,7 @@ test('Register throws', function() {
   r.register(t, T);
   throws(function() {
     r.register(t, T);
-  }, Resolver.ResolverInternalError, 'Dupe on register');
+  }, 'Dupe on register');
 
 });
 
@@ -32,7 +32,7 @@ test('Resolve method throws', function() {
 
   throws(function() {
     r._resolve('not there');
-  }, Resolver.ResolverInternalError, 'Missing type');
+  }, 'Missing type');
 });
 
 test('Basic dep track', 5, function() {
@@ -60,7 +60,7 @@ test('Throw on unmet dep', function() {
   r.register('T', function(A, B, C) {});
   throws(function() {
     r.make('T');
-  }, Resolver.ResolverInternalError, 'no deps');
+  }, 'no deps');
 
 });
 

@@ -3,8 +3,6 @@ var Observable = require('../../lib/Observable.js');
 var Signal     = require('../../lib/Signal.js');
 var __extends  = require('../../lib/util/extends.js');
 
-var SignalInternalError = Signal.SignalInternalError;
-
 QUnit.module('Signal');
 
 test('Signal creation semantics', function() {
@@ -22,7 +20,6 @@ test('Signal handers can only have 1 function per type', function() {
   handler.registerSignalHandler(SIG, function() {});
   throws(
     function() { handler.registerSignalHandler(SIG, function() {}); },
-    SignalInternalError,
     'dupe');
 
 });
