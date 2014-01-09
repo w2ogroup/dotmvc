@@ -1,6 +1,7 @@
 module.exports = {
 
   Binding    : require('./lib/Binding.js'),
+  Lifecycle  : require('./lib/Lifecycle.js'),
   Observable : require('./lib/Observable.js'),
   Repository : require('./lib/Repository.js'),
   Resolver   : require('./lib/Resolver.js'),

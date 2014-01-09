@@ -140,7 +140,15 @@ test('Using closures', function() {
   ok(r.make('c').a instanceof A, 'a instantiated');
   strictEqual(r.make('c').b, B_DEP, 'b corret');
 
+});
 
+test('Registering instances', function() {
 
+  var thing = {};
+
+  var r = new Resolver();
+  r.register('a', thing);
+  strictEqual(thing, r.make('a'), 'making returns instance');
+  strictEqual(thing, r.make('a'), 'making returns same instance');
 
 });
