@@ -62,9 +62,9 @@ test('Action handler', 2, function() {
   var ACTION = {};
 
   router.addHandler({
-    onAction: function(route, args) {
+    onAction: function(action, args, deps) {
       ok(true, 'executeAction() fired');
-      strictEqual(route.action, ACTION, 'action passed');
+      strictEqual(action, ACTION, 'action passed');
     }
   });
 
@@ -145,7 +145,7 @@ test('Response handler fallthrough', function() {
 
 });
 
-test('Handler via deps', 4, function() {
+test('Handler via deps', 3, function() {
 
   var ACTION = {};
   var RESP   = {};
@@ -156,10 +156,9 @@ test('Handler via deps', 4, function() {
   };
 
   function A() { }
-  A.prototype.onAction = function(r, args)  {
+  A.prototype.onAction = function(action, args, deps)  {
     deepEqual(args, ['1', '2'], 'args');
-    strictEqual(r, route, 'route passed in');
-    strictEqual(r.action, ACTION, 'action passed in');
+    strictEqual(action, ACTION, 'action passed in');
     return RESP;
   };
   function B() { }
