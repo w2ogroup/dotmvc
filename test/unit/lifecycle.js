@@ -7,8 +7,8 @@ test('State changes', function() {
 
   var t = new Lifecycle();
 
-  for (var key in Lifecycle.stages) {
-    var methodName = Lifecycle.stages[key];
+  for (var key in Lifecycle.states) {
+    var methodName = Lifecycle.states[key];
     (function(methodName) {
       t[methodName] = function() {
         ok(true, 'ran something...');
@@ -17,28 +17,28 @@ test('State changes', function() {
     })(methodName);
   }
 
-  t.changeState(Lifecycle.stages.CREATE);
-  strictEqual(t.getState(), Lifecycle.stages.CREATE, 'CREATE changed');
+  t.changeState(Lifecycle.states.CREATE);
+  strictEqual(t.getState(), Lifecycle.states.CREATE, 'CREATE changed');
 
-  t.changeState(Lifecycle.stages.START);
-  strictEqual(t.getState(), Lifecycle.stages.START, 'START changed');
+  t.changeState(Lifecycle.states.START);
+  strictEqual(t.getState(), Lifecycle.states.START, 'START changed');
 
-  t.changeState(Lifecycle.stages.RESUME);
-  strictEqual(t.getState(), Lifecycle.stages.RESUME, 'RESUME changed');
+  t.changeState(Lifecycle.states.RESUME);
+  strictEqual(t.getState(), Lifecycle.states.RESUME, 'RESUME changed');
 
-  t.changeState(Lifecycle.stages.PAUSE);
-  strictEqual(t.getState(), Lifecycle.stages.PAUSE, 'PAUSE changed');
+  t.changeState(Lifecycle.states.PAUSE);
+  strictEqual(t.getState(), Lifecycle.states.PAUSE, 'PAUSE changed');
 
-  t.changeState(Lifecycle.stages.RESUME);
-  strictEqual(t.getState(), Lifecycle.stages.RESUME, 'RESUME changed');
+  t.changeState(Lifecycle.states.RESUME);
+  strictEqual(t.getState(), Lifecycle.states.RESUME, 'RESUME changed');
 
-  t.changeState(Lifecycle.stages.PAUSE);
-  strictEqual(t.getState(), Lifecycle.stages.PAUSE, 'PAUSE changed');
+  t.changeState(Lifecycle.states.PAUSE);
+  strictEqual(t.getState(), Lifecycle.states.PAUSE, 'PAUSE changed');
 
-  t.changeState(Lifecycle.stages.STOP);
-  strictEqual(t.getState(), Lifecycle.stages.STOP, 'STOP changed');
+  t.changeState(Lifecycle.states.STOP);
+  strictEqual(t.getState(), Lifecycle.states.STOP, 'STOP changed');
 
-  t.changeState(Lifecycle.stages.DESTROY);
-  strictEqual(t.getState(), Lifecycle.stages.DESTROY, 'DESTROY changed');
+  t.changeState(Lifecycle.states.DESTROY);
+  strictEqual(t.getState(), Lifecycle.states.DESTROY, 'DESTROY changed');
 
 });
