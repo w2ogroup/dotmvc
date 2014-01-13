@@ -1,5 +1,5 @@
 var Lifecycle = require('../../lib/Lifecycle.js');
-var mixin_    = require('../../lib/util/mixin.js');
+var mixin_    = require('typedef').mixin;
 
 QUnit.module('Lifecycle');
 

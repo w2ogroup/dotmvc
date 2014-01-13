@@ -1,7 +1,7 @@
 var View       = require('../../lib/View.js');
 var Observable = require('../../lib/Observable.js');
 var Signal     = require('../../lib/Signal.js');
-var __extends  = require('../../lib/util/extends.js');
+var __extends  = require('typedef').extends;
 
 QUnit.module('Signal');
 
