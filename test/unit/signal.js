@@ -1,6 +1,6 @@
 var View       = require('../../lib/View.js');
-var Observable = require('../../lib/Observable.js');
 var Signal     = require('../../lib/Signal.js');
+var Observable = require('smack').Observable;
 var __extends  = require('typedef').extends;
 
 QUnit.module('Signal');
