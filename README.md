@@ -7,10 +7,7 @@ A tiny, sensible, client-side MVC framework in modern Javascript. It was
 created to provide a rich but minimal set of tools for creating scalable and
 powerful Javascript in the real world of shipping code quickly and correctly.
 
-* Website
 * [API Documentation](doc)
-* Dot MVC example app (source)
-* [Dot MVC on Twitter](http://twitter.com/dotmvc)
 * [Issues](http://github.com/bvalosek/dotmvc/issues)
 
 ## Installation
@@ -249,45 +246,6 @@ create the subview. The `View` parameter specifies the view class, and the
 ### Application ([API](doc/application-api.md))
 
 ### Controller ([API](doc/controller-api.md))
-
-## Coffeescript
-
-Though Dot MVC is written in Javascript and intended to be used in Javascript,
-it looks even sexier in Coffeescript if you're lucky enough to be in an
-environment where that is acceptable.
-
-### Examples
-
-Using the `extends` keyword and `super` makes subclassing much cleaner:
-
-```coffeescript
-class AwesomeWidget extends View
-  init: ->
-    super
-    delegate '.back-button', 'click', @close
-```
-
-Since the `observable()` function exists on the constructor of `Observable`,
-using this annotation-style declaration works:
-
-```coffeescript
-class Person extends Observable
-  @observable firstName: 'John'
-  @observable lastName: 'Doe'
-  @observable fullName: -> '#{@firstName} #{@lastName}'
-```
-
-Arrow-style syntax is great here for inline event handling:
-
-```coffeescript
-@delegate 'li','click', -> console.log 'dadgum'
-```
-
-Noiseless object literals:
-
-```coffeescript
-@delegateCommand '#save', 'click', saveUserPreferences: @user
-```
 
 ## Testing
 
