@@ -29,6 +29,7 @@
     "coffeeify": "^0.6.0",
     "grunt": "^0.4.5",
     "grunt-browserify": "^2.1.0",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-qunit": "^0.4.0",
     "grunt-contrib-watch": "^0.6.1"
