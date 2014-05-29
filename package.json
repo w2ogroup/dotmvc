@@ -25,16 +25,18 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "browserify": "~2.35.1",
-    "grunt-contrib-jshint": "~0.7.1",
-    "grunt-browserify": "~1.2.11",
-    "coffeeify": "~0.5.2",
-    "grunt-contrib-qunit": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.3"
+    "browserify": "^4.1.6",
+    "coffeeify": "^0.6.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^2.1.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-qunit": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1"
   },
   "dependencies": {
-    "underscore": "~1.5.2",
-    "backbone": "~1.1.0"
+    "backbone": "~1.1.0",
+    "jquery": "^2.1.1",
+    "typedef": "^1.0.4",
+    "underscore": "^1.5.2"
   }
 }

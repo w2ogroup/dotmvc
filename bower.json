@@ -1,6 +1,0 @@
-{
-  "name": "dotmvc",
-  "dependencies": {
-    "jquery": "~2.0.3"
-  }
-}
