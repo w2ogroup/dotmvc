@@ -12,47 +12,19 @@ powerful Javascript in the real world of shipping code quickly and correctly.
 
 ## Installation
 
-**Dot MVC** is meant to be used with [Browserify](http://browserify.org/),
-which lets you write client-side Javascript with the CommonJS-style module
-pattern that compiles down to a single bundle file.
-
-This ultimately keeps your code more organized, allows for better dependency
-management with `npm`, and streamlines development-to-production workflows.
-
 ```
 npm install dotmvc
 ```
 
-All of the components you'll need are in the `lib/` directory of the package.
+## Usage
+
+All of the components are accessible as members of the module:
 
 ```javascript
-var View       = require('dotmvc/lib/View');
-var Controller = require('dotmvc/lib/Controller');
+var View       = require('dotmvc').View;
+var Controller = require('dotmvc').Controller;
 ...
 ```
-
-Alternatively, all classes are exposed directly on the package itself.
-
-```javascript
-var DotMVC = require('dotmvc');
-
-var view = new DotMVC.View();
-...
-```
-
-## Browser Support
-
-**Dot MVC** is a modern Javascript framework that makes liberal use of the ES5
-feature set. This includes the new `Array.prototype` methods as well as
-frequent use of `Object.defineProperty()`.
-
-A modern, compliant browser is required.
-
-* Chrome
-* Firefox
-* Safari
-* Opera
-* IE 9+
 
 ## Overview
 
