@@ -35,9 +35,10 @@
     "grunt-contrib-watch": "^0.6.1"
   },
   "dependencies": {
-    "backbone": "~1.1.0",
+    "backbone": "^1.1.2",
+    "debug": "^1.0.2",
     "jquery": "^2.1.1",
     "typedef": "^1.0.4",
-    "underscore": "^1.5.2"
+    "underscore": "^1.6.0"
   }
 }
