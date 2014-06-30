@@ -1,6 +1,6 @@
 # Dot MVC
 
-[![Build Status](https://travis-ci.org/bvalosek/dotmvc.png?branch=master)](https://travis-ci.org/bvalosek/dotmvc)
+[![Build Status](https://travis-ci.org/w2ogroup/dotmvc.png?branch=master)](https://travis-ci.org/w2ogroup/dotmvc)
 [![NPM version](https://badge.fury.io/js/dotmvc.png)](http://badge.fury.io/js/dotmvc)
 
 A tiny, sensible, client-side MVC framework in modern Javascript. It was
@@ -8,7 +8,7 @@ created to provide a rich but minimal set of tools for creating scalable and
 powerful Javascript in the real world of shipping code quickly and correctly.
 
 * [API Documentation](doc)
-* [Issues](http://github.com/bvalosek/dotmvc/issues)
+* [Issues](http://github.com/w2ogroup/dotmvc/issues)
 
 ## Installation
 
