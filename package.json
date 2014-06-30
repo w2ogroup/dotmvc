@@ -2,7 +2,7 @@
   "name": "dotmvc",
   "version": "0.20.0",
   "description": "A tiny, sensible, client-side MVC framework in modern Javascript.",
-  "author": "Brandon Valosek",
+  "author": "W2O Group",
   "keywords": [
     "mvc",
     "model",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:bvalosek/dotmvc.git"
+    "url": "git@github.com:w2ogroup/dotmvc.git"
   },
   "directories": {
     "test": "test"
