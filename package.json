@@ -1,6 +1,6 @@
 {
   "name": "dotmvc",
-  "version": "0.20.2",
+  "version": "0.20.3",
   "description": "A tiny, sensible, client-side MVC framework in modern Javascript.",
   "author": "W2O Group",
   "keywords": [
